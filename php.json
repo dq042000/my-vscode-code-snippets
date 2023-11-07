@@ -116,7 +116,7 @@
             "    $$viewModel = new ViewModel();",
             "    $$form = new $2Form('$3');",
             "    if ($$id = $$this->params()->fromQuery('id')) {",
-            "        $$em = $this->getEntityManager();",
+            "        $$em = $$this->getEntityManager();",
             "        $$res = $$em->getRepository($4::class)->find($id);",
             "        if (!$$res) exit('error');",
             "        $$form->get('id')->setValue($$id);",
