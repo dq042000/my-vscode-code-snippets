@@ -28,16 +28,16 @@
         "body": [
             "$$em = $$this->getEntityManager();",
             "$$res = $$em->createQueryBuilder()",
-            "->select('u')",
-            "->from('Base\\Entity\\\\$1', 'u')",
-            "->leftJoin('u.$2', 'j')",
-            "->where('$3')",
-            "->andWhere('u.id = :id')",
-            "->setParameter('id', $4)",
-            "->groupBy('u.id')",
-            "->orderBy('u.id', 'asc')",
-            "->getQuery()",
-            "->getResult();"
+            "   ->select('u')",
+            "   ->from('Base\\Entity\\\\$1', 'u')",
+            "   ->leftJoin('u.$2', 'j')",
+            "   ->where('$3')",
+            "   ->andWhere('u.id = :id')",
+            "   ->setParameter('id', $4)",
+            "   ->groupBy('u.id')",
+            "   ->orderBy('u.id', 'asc')",
+            "   ->getQuery()",
+            "   ->getResult();"
         ],
         // 敘述
         "description": "返回物件"
@@ -48,16 +48,16 @@
         "body": [
             "$$em = $$this->getEntityManager();",
             "$$res = $$em->createQueryBuilder()",
-            "->select('u')",
-            "->from('Base\\Entity\\\\$1', 'u')",
-            "->leftJoin('u.$2', 'j')",
-            "->where('$3')",
-            "->andWhere('u.id = :id')",
-            "->setParameter('id', $4)",
-            "->groupBy('u.id')",
-            "->orderBy('u.id', 'asc')",
-            "->getQuery()",
-            "->getArrayResult();"
+            "   ->select('u')",
+            "   ->from('Base\\Entity\\\\$1', 'u')",
+            "   ->leftJoin('u.$2', 'j')",
+            "   ->where('$3')",
+            "   ->andWhere('u.id = :id')",
+            "   ->setParameter('id', $4)",
+            "   ->groupBy('u.id')",
+            "   ->orderBy('u.id', 'asc')",
+            "   ->getQuery()",
+            "   ->getArrayResult();"
         ],
         "description": "返回陣列"
     },
@@ -131,7 +131,7 @@
         "scope": "php,laminas",
         "prefix": "lm-get-data-action",
         "body": [
-            "public function $1getDataAction()",
+            "public function ${1:getData}Action()",
             "{",
             "    $$viewModel = new ViewModel();",
             "    $$em = $$this->getEntityManager();",
@@ -156,7 +156,7 @@
         "scope": "php,laminas",
         "prefix": "lm-save-action",
         "body": [
-            "public function $1saveACtion()",
+            "public function ${1:save}ACtion()",
             "{",
             "    $$jsonModel = new JsonModel();",
             "    $$em = $$this->getEntityManager();",
@@ -196,7 +196,7 @@
         "scope": "php,laminas",
         "prefix": "lm-delete-action",
         "body": [
-            "public function $1deleteAction()",
+            "public function ${1:delete}Action()",
             "{",
             "    $$jsonModel = new JsonModel();",
             "    $$em = $$this->getEntityManager();",
