@@ -1,0 +1,235 @@
+{
+	// Place your GLOBAL snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+    // 這段放在"喜好設定>JSON檔裡面"。
+    // editor.snippetSuggestions": "top"
+    // 這段的意思是告訴它我們要把我們設定的 Snippet 放在最上面顯示。
+
+    // 自訂名稱
+    "doctrine result": {
+        "scope": "php,doctrine",
+        // 觸發使用者程式碼片段的關鍵字
+        "prefix": "php-db-result",
+        // 程式碼
+        "body": [
+            "$$em = $$this->getEntityManager();",
+            "$$res = $$em->createQueryBuilder()",
+            "->select('u')",
+            "->from('Base\\Entity\\\\$1', 'u')",
+            "->leftJoin('u.$2', 'j')",
+            "->where('$3')",
+            "->andWhere('u.id = :id')",
+            "->setParameter('id', $4)",
+            "->groupBy('u.id')",
+            "->orderBy('u.id', 'asc')",
+            "->getQuery()",
+            "->getResult();"
+        ],
+        // 敘述
+        "description": "返回物件"
+    },
+    "doctrine array result": {
+        "scope": "php,doctrine",
+        "prefix": "php-db-array-result",
+        "body": [
+            "$$em = $$this->getEntityManager();",
+            "$$res = $$em->createQueryBuilder()",
+            "->select('u')",
+            "->from('Base\\Entity\\\\$1', 'u')",
+            "->leftJoin('u.$2', 'j')",
+            "->where('$3')",
+            "->andWhere('u.id = :id')",
+            "->setParameter('id', $4)",
+            "->groupBy('u.id')",
+            "->orderBy('u.id', 'asc')",
+            "->getQuery()",
+            "->getArrayResult();"
+        ],
+        "description": "返回陣列"
+    },
+    "pre": {
+        "scope": "php,html",
+        "prefix": "php-pre",
+        "body": [
+            "echo \"<pre>\";",
+            "print_r($1);",
+            "echo \"</pre>\";",
+            "exit;"
+        ],
+        "description": "output array"
+    },
+    "print": {
+        "scope": "php,html",
+        "prefix": "php-print",
+        "body": [
+            "print_r($1);",
+            "exit;"
+        ],
+        "description": "output array"
+    },
+    "log": {
+        "scope": "php,html",
+        "prefix": "php-log",
+        "body": [
+            "file_put_contents('./data/error.txt', print_r($$1, true), FILE_APPEND);"
+        ],
+        "description": "input array"
+    },
+    "try": {
+        "scope": "php",
+        "prefix": "php-try",
+        "body": [
+            "try {",
+            "    $1",
+            "} catch (\\Exception $$exception) {",
+            "    $$jsonModel->setVariable('success', false);",
+            "    $$jsonModel->setVariable('message', '儲存報名表時發生錯誤 ! ' . $$exception);",
+            "    return $$jsonModel;",
+            "}"
+        ],
+        "description": "output try"
+    },
+
+    /**
+     * Laminas
+     */
+    "laminas form action": {
+        "scope": "php,laminas",
+        "prefix": "lm-form-action",
+        "body": [
+            "public function $1FormAction()",
+            "{",
+            "    $$viewModel = new ViewModel();",
+            "    $$form = new $2Form('$3');",
+            "    if ($$id = $$this->params()->fromQuery('id')) {",
+            "        $$em = $this->getEntityManager();",
+            "        $$res = $$em->getRepository($4::class)->find($id);",
+            "        if (!$$res) exit('error');",
+            "        $$form->get('id')->setValue($$id);",
+            "    }",
+            "    $$viewModel->setVariable('form', $$form);",
+            "    return $$viewModel;",
+            "}",
+        ],
+        "description": "Form action",
+    },
+    "laminas get data action": {
+        "scope": "php,laminas",
+        "prefix": "lm-get-data-action",
+        "body": [
+            "public function $1getDataAction()",
+            "{",
+            "    $$viewModel = new ViewModel();",
+            "    $$em = $$this->getEntityManager();",
+            "    $$q = $$em->createQueryBuilder()",
+            "        ->select('u')",
+            "        ->from($2::class, 'u')",
+            "        ->orderBy('u.id', 'desc');",
+            "    $$adapter = new DoctrineAdapter(new ORMPaginator($$q));",
+            "    $$paginator = new Paginator($$adapter);",
+            "    $$paginator->setDefaultItemCountPerPage($3);",
+            "    $$page = (int) $$this->params()->fromQuery('page', 1);",
+            "    if ($$page) {",
+            "        $$paginator->setCurrentPageNumber($$page);",
+            "    }",
+            "    $$viewModel->setVariable('paginator', $$paginator);",
+            "    return $$viewModel;",
+            "}",
+        ],
+        "description": "Get data action",
+    },
+    "laminas save action": {
+        "scope": "php,laminas",
+        "prefix": "lm-save-action",
+        "body": [
+            "public function $1saveACtion()",
+            "{",
+            "    $$jsonModel = new JsonModel();",
+            "    $$em = $$this->getEntityManager();",
+            "    $$data = $$this->params()->fromPost();",
+            "    $$form = new $2Form('$3');",
+            "    $$form->setData($$data);",
+            "    if ($$form->isValid()) {",
+            "        $$data = $$form->getData();",
+            "        try {",
+            "            $$result = $$data;",
+            "            if ($data['id']) {",
+            "                /** @var $4 $$5 */",
+            "                $$res = $$em->getRepository($4::class)->find((int) $$data['id']);",
+            "            } else {",
+            "                $$res = new $4();",
+            "            }",
+            "            $$res->populate($$result);",
+            "            $$em->persist($$res);",
+            "            $$em->flush();",
+            "            $$jsonModel->setVariable('success', true);",
+            "            $$this->systemLogger('warn', '新增/編修了 $6 資料');",
+            "        } catch (\Exception $$exception) {",
+            "            $$jsonModel->setVariable('success', false);",
+            "            $$jsonModel->setVariable('message', $$exception->getMessage());",
+            "        }",
+            "    } else {",
+            "        $$jsonModel->setVariable('success', false);",
+            "        $$jsonModel->setVariable('message', '錯誤的資料，請檢查');",
+            "        $$jsonModel->setVariable('form_messages', $$form->getMessages());",
+            "    }",
+            "    return $$jsonModel;",
+            "}",
+        ],
+        "description": "Save action",
+    },
+    "laminas delete action": {
+        "scope": "php,laminas",
+        "prefix": "lm-delete-action",
+        "body": [
+            "public function $1deleteAction()",
+            "{",
+            "    $$jsonModel = new JsonModel();",
+            "    $$em = $$this->getEntityManager();",
+            "    $$id = (int) $$this->params()->fromQuery('id');",
+            "    try {",
+            "        if ($$em->getRepository($2::class)->findOneBy(['id' => $$id])) {",
+            "            $$jsonModel->setVariable('success', false);",
+            "            $$jsonModel->setVariable('message', '此年度已有類別，無法刪除');",
+            "            return $$jsonModel;",
+            "        }",
+            "        $$res = $$em->getRepository($2::class)->find($$id);",
+            "        $$em->remove($$res);",
+            "        $$em->flush();",
+            "",
+            "        $$jsonModel->setVariable('success', true);",
+            "        $this->systemLogger('crit', '刪除了 $3 資料');",
+            "    } catch (\Exception $$exception) {",
+            "        $$jsonModel->setVariable('success', false);",
+            "        $$jsonModel->setVariable('message', $$exception->getMessage());",
+            "    }",
+            "    return $$jsonModel;",
+            "}",
+        ],
+        "description": "Delete action",
+    },
+    "laminas use page packagist": {
+        "scope": "php,laminas",
+        "prefix": "lm-use-page",
+        "body": [
+            "use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;",
+            "use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;",
+            "use Laminas\Paginator\Paginator;",
+        ],
+        "description": "Use page packagist",
+    },
+}
