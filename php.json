@@ -110,7 +110,7 @@
         "scope": "php,doctrine",
         "prefix": "doctrine-db-repository",
         "body": [
-            "$$rse = $$em->getRepository(${1})->find(${2});",
+            "$$res = $$em->getRepository(${1})->find(${2});",
         ],
         "description": "返回物件"
     },
