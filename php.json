@@ -18,58 +18,19 @@
     // 這段放在"喜好設定>JSON檔裡面"。
     // editor.snippetSuggestions": "top"
     // 這段的意思是告訴它我們要把我們設定的 Snippet 放在最上面顯示。
-
     // 自訂名稱
-    "doctrine result": {
-        "scope": "php,doctrine",
-        // 觸發使用者程式碼片段的關鍵字
-        "prefix": "php-db-result",
-        // 程式碼
-        "body": [
-            "$$em = $$this->getEntityManager();",
-            "$$res = $$em->createQueryBuilder()",
-            "   ->select('u')",
-            "   ->from('Base\\Entity\\\\$1', 'u')",
-            "   ->leftJoin('u.$2', 'j')",
-            "   ->where('$3')",
-            "   ->andWhere('u.id = :id')",
-            "   ->setParameter('id', $4)",
-            "   ->groupBy('u.id')",
-            "   ->orderBy('u.id', 'asc')",
-            "   ->getQuery()",
-            "   ->getResult();"
-        ],
-        // 敘述
-        "description": "返回物件"
-    },
-    "doctrine array result": {
-        "scope": "php,doctrine",
-        "prefix": "php-db-array-result",
-        "body": [
-            "$$em = $$this->getEntityManager();",
-            "$$res = $$em->createQueryBuilder()",
-            "   ->select('u')",
-            "   ->from('Base\\Entity\\\\$1', 'u')",
-            "   ->leftJoin('u.$2', 'j')",
-            "   ->where('$3')",
-            "   ->andWhere('u.id = :id')",
-            "   ->setParameter('id', $4)",
-            "   ->groupBy('u.id')",
-            "   ->orderBy('u.id', 'asc')",
-            "   ->getQuery()",
-            "   ->getArrayResult();"
-        ],
-        "description": "返回陣列"
-    },
     "pre": {
         "scope": "php,html",
+        // 觸發使用者程式碼片段的關鍵字
         "prefix": "php-pre",
+        // 程式碼
         "body": [
             "echo \"<pre>\";",
             "print_r($1);",
             "echo \"</pre>\";",
             "exit;"
         ],
+        // 敘述
         "description": "output array"
     },
     "print": {
@@ -102,6 +63,56 @@
             "}"
         ],
         "description": "output try"
+    },
+
+    /**
+     * Doctrine
+     */
+    "doctrine result": {
+        "scope": "php,doctrine",
+        "prefix": "doctrine-db-result",
+        "body": [
+            "$$em = $$this->getEntityManager();",
+            "$$res = $$em->createQueryBuilder()",
+            "   ->select('u')",
+            "   ->from('Base\\Entity\\\\$1', 'u')",
+            "   ->leftJoin('u.$2', 'j')",
+            "   ->where('$3')",
+            "   ->andWhere('u.id = :id')",
+            "   ->setParameter('id', $4)",
+            "   ->groupBy('u.id')",
+            "   ->orderBy('u.id', 'asc')",
+            "   ->getQuery()",
+            "   ->getResult();"
+        ],
+        "description": "返回物件"
+    },
+    "doctrine array result": {
+        "scope": "php,doctrine",
+        "prefix": "doctrine-db-array-result",
+        "body": [
+            "$$em = $$this->getEntityManager();",
+            "$$res = $$em->createQueryBuilder()",
+            "   ->select('u')",
+            "   ->from('Base\\Entity\\\\$1', 'u')",
+            "   ->leftJoin('u.$2', 'j')",
+            "   ->where('$3')",
+            "   ->andWhere('u.id = :id')",
+            "   ->setParameter('id', $4)",
+            "   ->groupBy('u.id')",
+            "   ->orderBy('u.id', 'asc')",
+            "   ->getQuery()",
+            "   ->getArrayResult();"
+        ],
+        "description": "返回陣列"
+    },
+    "doctrine repository": {
+        "scope": "php,doctrine",
+        "prefix": "doctrine-db-repository",
+        "body": [
+            "$$rse = $$em->getRepository(${1})->find(${2});",
+        ],
+        "description": "返回物件"
     },
 
     /**
