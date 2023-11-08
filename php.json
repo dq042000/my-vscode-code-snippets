@@ -178,7 +178,7 @@
             "        $$data = $$form->getData();",
             "        try {",
             "            $$result = $$data;",
-            "            if ($data['id']) {",
+            "            if ($$data['id']) {",
             "                /** @var $4 $$5 */",
             "                $$res = $$em->getRepository($4::class)->find((int) $$data['id']);",
             "            } else {",
