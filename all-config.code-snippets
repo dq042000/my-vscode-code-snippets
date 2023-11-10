@@ -279,4 +279,13 @@
         ],
         "description": "",
     },
+    "shell script example": {
+        "prefix": "config-shell-script",
+        "body": [
+            "#!/bin/bash",
+            "",
+            "$1",
+        ],
+        "description": "Create shell script file",
+    },
 }
