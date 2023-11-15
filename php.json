@@ -64,6 +64,35 @@
         ],
         "description": "output try"
     },
+    "import excel": {
+        "scope": "php",
+        "prefix": "php-import-excel",
+        "body": [
+            "$$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();",
+            "$$reader->setReadDataOnly(true);",
+            "try {",
+            "    $$spreadsheet = $$reader->load('$1');",
+            "} catch (\PhpOffice\PhpSpreadsheet\Reader\Exception $$e) {",
+            "    die($$e->getMessage());",
+            "}",
+            "",
+            "$$sheet = $$spreadsheet->getActiveSheet();",
+            "$$dataRes = [];",
+            "foreach ($$sheet->getRowIterator(1) as $$row) {",
+            "    $$tmp = [];",
+            "    foreach ($$row->getCellIterator() as $$key => $$cell) {",
+            "        $$tmp[] = trim($$cell->getFormattedValue());",
+            "        if ($$key == 'M') {",
+            "            break;",
+            "        }",
+            "    }",
+            "    if ($$tmp[0] != '') {",
+            "        $$dataRes[$$row->getRowIndex()] = $$tmp;",
+            "    }",
+            "}",
+        ],
+        "description": "import excel"
+    },
 
     /**
      * Doctrine
