@@ -46,7 +46,7 @@
         "scope": "php,html",
         "prefix": "php-log",
         "body": [
-            "file_put_contents('./data/error.txt', print_r($$1, true), FILE_APPEND);"
+            "file_put_contents('./data/error.txt', print_r($$1, true) . \"\\n\", FILE_APPEND);"
         ],
         "description": "input array"
     },
@@ -68,11 +68,11 @@
         "scope": "php",
         "prefix": "php-import-excel",
         "body": [
-            "$$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();",
+            "$$reader = new \\PhpOffice\\PhpSpreadsheet\\Reader\\Xlsx();",
             "$$reader->setReadDataOnly(true);",
             "try {",
             "    $$spreadsheet = $$reader->load('$1');",
-            "} catch (\PhpOffice\PhpSpreadsheet\Reader\Exception $$e) {",
+            "} catch (\\PhpOffice\\PhpSpreadsheet\\Reader\\Exception $$e) {",
             "    die($$e->getMessage());",
             "}",
             "",
@@ -218,7 +218,7 @@
             "            $$em->flush();",
             "            $$jsonModel->setVariable('success', true);",
             "            $$this->systemLogger('warn', '新增/編修了 $6 資料');",
-            "        } catch (\Exception $$exception) {",
+            "        } catch (\\Exception $$exception) {",
             "            $$jsonModel->setVariable('success', false);",
             "            $$jsonModel->setVariable('message', $$exception->getMessage());",
             "        }",
@@ -253,7 +253,7 @@
             "",
             "        $$jsonModel->setVariable('success', true);",
             "        $this->systemLogger('crit', '刪除了 $3 資料');",
-            "    } catch (\Exception $$exception) {",
+            "    } catch (\\Exception $$exception) {",
             "        $$jsonModel->setVariable('success', false);",
             "        $$jsonModel->setVariable('message', $$exception->getMessage());",
             "    }",
